@@ -1,4 +1,41 @@
-# flagi-2
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Mistrz Geografii</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; background-color: #2c3e50; color: white; margin: 0; padding: 0; }
+        
+        /* Styl dla Lobby i Kontenera Gry */
+        .screen { max-width: 600px; margin: 50px auto; background: #34495e; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        .hidden { display: none !important; }
+
+        h1 { margin-top: 0; color: #f1c40f; }
+        
+        /* Obrazek (Flaga lub Mapa) */
+        img { border: 5px solid #ecf0f1; max-height: 200px; max-width: 100%; margin-bottom: 20px; border-radius: 10px; background: white; padding: 10px; }
+        
+        /* Przyciski w menu i grze */
+        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .menu-btn { display: block; width: 100%; margin: 10px 0; padding: 20px; font-size: 18px; font-weight: bold; background: #27ae60; border: none; border-radius: 8px; color: white; cursor: pointer; transition: 0.3s; }
+        .menu-btn:hover { background: #2ecc71; transform: scale(1.02); }
+
+        .game-btn { padding: 15px; font-size: 16px; cursor: pointer; background: #2980b9; color: white; border: none; border-radius: 5px; transition: 0.2s; }
+        .game-btn:hover { background: #3498db; }
+
+        /* Input dla wariantu 3 */
+        input[type="text"] { width: 70%; padding: 15px; font-size: 18px; border-radius: 5px; border: none; margin-bottom: 10px; text-align: center; }
+        .submit-btn { padding: 15px 30px; background: #e67e22; color: white; border: none; border-radius: 5px; font-size: 18px; cursor: pointer; }
+
+        /* Sekcja kart bonusowych */
+        #bonus-section { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 100; justify-content: center; align-items: center; flex-direction: column; }
+        .cards-container { display: flex; gap: 20px; margin-top: 20px; }
+        .card { width: 120px; height: 180px; background: linear-gradient(45deg, #f39c12, #d35400); display: flex; justify-content: center; align-items: center; font-size: 40px; font-weight: bold; cursor: pointer; border: 4px solid white; border-radius: 15px; box-shadow: 0 0 20px rgba(255, 165, 0, 0.6); transition: 0.3s; }
+        .card:hover { transform: translateY(-10px); }
+
+        #stats { font-size: 22px; margin-bottom: 20px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 5px; }
+        
+        .back-btn { margin-top: 20px; background: #c0392b; width: auto; display: # flagi-2
 html<!DOCTYPE html>
 <html lang="pl">
 <head>
