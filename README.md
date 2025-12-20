@@ -3,6 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mistrz Geografii (Jasny)</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            text-align: center; 
+            background-color: #f4f6f7; /* Jasne tło strony */
+            color: #2c3e50; /* Ciemny (prawie czarny) kolor tekstu */
+            margin: 0; 
+            padding: 0; 
+        }
+        
+        /* GŁÓWNE PUDEŁKA */
+        .screen { 
+            max-width: 600px; 
+            margin: 30px auto; 
+            background: #ffffff; /* Białe tło pudełka */
+            padding: 30px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px <!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mistrz Geografii + Ranking</title>
     <style>
         body { 
