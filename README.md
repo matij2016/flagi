@@ -2,6 +2,170 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mistrz Geografii + Ranking</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            text-align: center; 
+            background-color: #2c3e50; 
+            color: white; 
+            margin: 0; 
+            padding: 0; 
+        }
+        
+        /* GŁÓWNE PUDEŁKA */
+        .screen { 
+            max-width: 600px; 
+            margin: 30px auto; 
+            background: #34495e; 
+            padding: 30px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5); 
+        }
+
+        h1 { margin-top: 0; color: #f1c40f; }
+        h2 { color: #ecf0f1; }
+        
+        /* OBRAZEK */
+        img { 
+            border: 5px solid #ecf0f1; 
+            max-height: 200px; 
+            max-width: 100%; 
+            margin-bottom: 20px; 
+            border-radius: 10px; 
+            background: white; 
+            padding: 10px; 
+        }
+        
+        /* PRZYCISKI MENU */
+        .menu-btn { 
+            display: block; 
+            width: 100%; 
+            margin: 15px 0; 
+            padding: 15px; 
+            font-size: 18px; 
+            font-weight: bold; 
+            background: #27ae60; 
+            border: none; 
+            border-radius: 8px; 
+            color: white; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            box-shadow: 0 5px 0 #1e8449;
+        }
+        .menu-btn:hover { background: #2ecc71; transform: translateY(-2px); }
+        .menu-btn:active { transform: translateY(2px); box-shadow: none; }
+
+        /* PRZYCISKI GRY */
+        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .game-btn { 
+            padding: 15px; 
+            font-size: 16px; 
+            cursor: pointer; 
+            background: #2980b9; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+        }
+        .game-btn:hover { background: #3498db; }
+
+        /* INPUT */
+        input[type="text"] { 
+            width: 70%; padding: 15px; font-size: 18px; 
+            border-radius: 5px; border: none; margin-bottom: 10px; 
+            text-align: center; 
+        }
+        .submit-btn { 
+            padding: 15px 30px; background: #e67e22; color: white; 
+            border: none; border-radius: 5px; font-size: 18px; cursor: pointer; 
+        }
+
+        /* TABELA RANKINGOWA */
+        #leaderboard {
+            margin-top: 20px;
+            background: rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        th { color: #f39c12; }
+        tr:first-child td { font-weight: bold; color: #f1c40f; } /* Złoty dla 1 miejsca */
+
+        /* KARTY BONUSOWE */
+        #bonus-section { 
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.95); z-index: 100; 
+            justify-content: center; align-items: center; flex-direction: column; 
+        }
+        .cards-container { display: flex; gap: 20px; margin-top: 20px; }
+        .card { 
+            width: 100px; height: 150px; 
+            background: linear-gradient(45deg, #f39c12, #d35400); 
+            display: flex; justify-content: center; align-items: center; 
+            font-size: 40px; font-weight: bold; cursor: pointer; 
+            border: 4px solid white; border-radius: 15px; 
+        }
+
+        .back-btn { background: #c0392b; box-shadow: 0 5px 0 #922b21; }
+        .back-btn:hover { background: #e74c3c; }
+    </style>
+</head>
+<body>
+
+<!-- LOBBY (MENU GŁÓWNE) -->
+<div id="lobby" class="screen">
+    <h1>🌍 Mistrz Geografii 🌍</h1>
+    <p>Wybierz tryb gry:</p>
+    <button class="menu-btn" onclick="startGame(1)">🚩 Wariant 1: Flaga (Wybór)</button>
+    <button class="menu-btn" onclick="startGame(2)">🗺️ Wariant 2: Kształt (Wybór)</button>
+    <button class="menu-btn" onclick="startGame(3)">⌨️ Wariant 3: Flaga (Wpisywanie)</button>
+
+    <!-- TABELA WYNIKÓW -->
+    <div id="leaderboard">
+        <h3>🏆 Najlepsi Gracze (Top 5)</h3>
+        <table id="score-table">
+            <thead>
+                <tr>
+                    <th>Miejsce</th>
+                    <th>Gracz</th>
+                    <th>Punkty</th>
+                </tr>
+            </thead>
+            <tbody id="score-list">
+                <!-- Tu JavaScript wstawi wyniki -->
+                <tr><td colspan="3">Brak wyników. Zagraj pierwszy!</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- EKRAN GRY -->
+<div id="game-container" class="screen" style="display: none;">
+    <div id="stats">
+        ❤️ Życia: <span id="lives">3</span> | ⭐ Punkty: <span id="score">0</span>
+    </div>
+    <h2 id="question-text">Co to za kraj?</h2>
+    <img id="game-img" src="" alt="Zagadka">
+
+    <div id="answers-grid" class="btn-grid">
+        <button class="game-btn" onclick="checkAnswer(0)">A</button>
+        <button class="game-btn" onclick="checkAnswer(1)">B</button>
+        <button class="game-btn" onclick="checkAnswer(2)">C</button>
+        <button class="game-btn" onclick="checkAnswer(3)">D</button>
+    </div>
+    
+    <div id="input-area" style="display:none;">
+        <input type="text" id="type-answer" placeholder="Wpisz nazwę kraju..." onkeydown="if(event.key === 'Enter') checkTypeAnswer()">
+        <br>
+        <button class="submit-btn" onclick="checkTypeAnswer()">SPRAWDŹ</button>
+    </div>
+
+    <button class="menu-btn back-btn" <!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
     <title>Mistrz Geografii</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; background-color: #2c3e50; color: white; margin: 0; padding: 0; }
